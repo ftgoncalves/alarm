@@ -9,6 +9,8 @@ const int S5 = 14;
 const int S6 = 15;
 const int ALERT = 16;
 const int LIGHT1 = 9;
+const int ALERT_STATE = 30000;
+const int LIGHT_ON = 30000;
 
 bool alert = false;
 int wich_one = -1;
@@ -33,7 +35,7 @@ void loop() {
     int ck = isOk();
     if (ck != -1 || alert) {
       unsigned long startTime = millis();
-      while (millis() - startTime < 10000) { // Getting alert state into 30s
+      while (millis() - startTime < ALERT_STATE) { // Getting alert state into 30s
           
           if (wich_one != ck && ck != -1 && alert) {
               digitalWrite(ALERT, LOW);
@@ -52,7 +54,7 @@ void loop() {
 
 void turneOnLights() {
     unsigned long startTime = millis();
-    while (millis() - startTime < 10000) {
+    while (millis() - startTime < LIGHT_ON) {
         digitalWrite(LIGHT1, HIGH);
     }
     digitalWrite(LIGHT1, LOW);
